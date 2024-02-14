@@ -1,26 +1,38 @@
-const fs = require("fs")
+const fs = require("fs");
 
-function getTodosLivros(){
- return  JSON.parse( fs.readFileSync("livros.json"))
-} 
-
-function getLivrosPorId(id){
-    const livros = JSON.parse(fs.readFileSync("livros.json"))
-
-    const livroFiltrado = livros.filter(livro => livro.id === id )[0]
-    return livroFiltrado
+// Função para ler o conteúdo do arquivo "livros.json"
+function lerArquivoLivros() {
+  const filePath = "livros.json";
+  const data = fs.readFileSync(filePath, "utf8");
+  return JSON.parse(data);
 }
 
-function insereLivro(livroNovo){
-    const livros = JSON.parse(fs.readFileSync("livros.json"))
+// Função para escrever no arquivo "livros.json"
+function escreverArquivoLivros(data) {
+  const filePath = "livros.json";
+  fs.writeFileSync(filePath, JSON.stringify(data, null, 2), "utf8");
+}
 
-    const novaListaDeLivros = [... livros, livroNovo]
+// Função para obter todos os livros
+function getTodosLivros() {
+  return lerArquivoLivros();
+}
 
-    fs.writeFileSync("livros.json",JSON.stringify(novaListaDeLivros))
+// Função para obter um livro por ID
+function getLivrosPorId(id) {
+  const livros = lerArquivoLivros();
+  return livros.find(livro => livro.id === id);
+}
+
+// Função para inserir um novo livro
+function insereLivro(livroNovo) {
+  const livros = lerArquivoLivros();
+  livros.push(livroNovo);
+  escreverArquivoLivros(livros);
 }
 
 module.exports = {
-    getTodosLivros,
-    getLivrosPorId,
-    insereLivro
-}
+  getTodosLivros,
+  getLivrosPorId,
+  insereLivro
+};

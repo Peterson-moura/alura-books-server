@@ -1,20 +1,26 @@
 const { Router } = require("express");
-const {getLivros, getLivro, postLivro} = require("../controladores/livro")
+const { getLivros, getLivro, postLivro } = require("../controladores/livro");
 
 const router = Router();
 
-router.get("/", getLivros );
+// Rota para obter todos os livros
+router.get("/", getLivros);
 
+// Rota para obter um livro por ID
 router.get("/:id", getLivro);
 
+// Rota para adicionar um novo livro
 router.post("/", postLivro);
 
-router.patch("/", (req, res) =>
-  res.send("Voce fez uma requisição do tipo PATCH")
-);
+// Rota para atualizar um livro (PATCH)
+router.patch("/", (req, res) => {
+  res.status(405).send("Method Not Allowed"); // Método PATCH não permitido
+});
 
-router.delete("/", (req, res) =>
-  res.send("Voce fez uma requisição do tipo DELETE")
-);
+// Rota para excluir um livro (DELETE)
+router.delete("/", (req, res) => {
+  res.status(405).send("Method Not Allowed"); // Método DELETE não permitido
+});
 
 module.exports = router;
+
