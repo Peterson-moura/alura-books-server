@@ -1,4 +1,4 @@
-const { getTodosLivros, getLivrosPorId, insereLivro } = require("../servicos/livro");
+const { getTodosLivros, getLivrosPorId, insereLivro, modificaLivro} = require("../servicos/livro");
 
 // Função para lidar com todas as solicitações HTTP
 function handleRequest(req, res, operation) {
@@ -36,9 +36,34 @@ function postLivro(req, res) {
   });
 }
 
+
+
+/**
+ * Função para lidar com requisições PATCH para modificar um livro.
+ * @param {Object} req - Objeto de requisição do Express.
+ * @param {Object} res - Objeto de resposta do Express.
+ */
+function patchLivro(req, res) {
+  try {
+    const id = req.params.id; // Obtém o ID do livro a ser modificado da requisição
+    const body = req.body; // Obtém o corpo da requisição contendo as modificações
+
+    // Chama a função modificaLivro para aplicar as modificações no livro
+    modificaLivro(body, id);
+
+    // Retorna uma resposta de sucesso
+    res.send("Item modificado com sucesso");
+  } catch (error) {
+    // Se ocorrer um erro, retorna uma resposta com status 500 e a mensagem de erro
+    res.status(500).send(error.message);
+  }
+}
+
 // Exporta as funções para serem usadas em outros arquivos
 module.exports = {
   getLivros,
   getLivro,
-  postLivro
+  postLivro,
+  modificaLivro,
+  patchLivro
 };

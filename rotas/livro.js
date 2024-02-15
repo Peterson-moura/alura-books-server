@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { getLivros, getLivro, postLivro } = require("../controladores/livro");
+const { getLivros, getLivro, postLivro, patchLivro } = require("../controladores/livro");
 
 const router = Router();
 
@@ -13,9 +13,7 @@ router.get("/:id", getLivro);
 router.post("/", postLivro);
 
 // Rota para atualizar um livro (PATCH)
-router.patch("/", (req, res) => {
-  res.status(405).send("Method Not Allowed"); // Método PATCH não permitido
-});
+router.patch("/:id", patchLivro);
 
 // Rota para excluir um livro (DELETE)
 router.delete("/", (req, res) => {
