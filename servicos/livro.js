@@ -26,11 +26,6 @@ function getLivrosPorId(id) {
 
 
 
-/**
- * Função para modificar um livro existente no arquivo "livros.json".
- * @param {Object} modificacoes - Objeto contendo as modificações a serem feitas no livro.
- * @param {string} id - ID do livro a ser modificado.
- */
 function modificaLivro(modificacoes, id) {
   // Lê o conteúdo atual do arquivo "livros.json"
   let livrosAtuais = JSON.parse(fs.readFileSync("livros.json"));

@@ -37,12 +37,6 @@ function postLivro(req, res) {
 }
 
 
-
-/**
- * Função para lidar com requisições PATCH para modificar um livro.
- * @param {Object} req - Objeto de requisição do Express.
- * @param {Object} res - Objeto de resposta do Express.
- */
 function patchLivro(req, res) {
   try {
     const id = req.params.id; // Obtém o ID do livro a ser modificado da requisição
